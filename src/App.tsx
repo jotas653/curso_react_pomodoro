@@ -1,15 +1,35 @@
+import { PlayCircleIcon } from "lucide-react";
 import { Container } from "./components/Container";
 import { Countdown } from "./components/Countdown";
 import { Cycles } from "./components/Cycles";
+import { DefaultButton } from "./components/DefaultButton";
 import { DefaultInput } from "./components/DefaultInput";
+import { Footer } from "./components/Footer";
+import { Heading } from "./components/Heading";
 import { Logo } from "./components/Logo";
 import { Menu } from "./components/Menu";
 import "./styles/global.css";
 import "./styles/theme.css";
 
 export function App() {
+  let numero = 0;
+
+  function handleClick() {
+    const span = document.getElementById("numero");
+    if (!span) return;
+
+    numero += 1;
+    span.innerText = numero.toString();
+    console.log(numero, Date.now());
+  }
+
   return (
     <>
+      <Heading>
+        Número: <span id="numero">{numero}</span>
+      </Heading>
+      <button onClick={handleClick}>Aumenta</button>
+
       <Container>
         <Logo />
       </Container>
@@ -26,7 +46,7 @@ export function App() {
         <form className="form" action="">
           <div className="formRow">
             <DefaultInput
-              labelText="task"
+              labelText={numero.toString()}
               id="meuInput"
               type="text"
               placeholder="Digite algo"
@@ -42,9 +62,13 @@ export function App() {
           </div>
 
           <div className="formRow">
-            <button>Enviar</button>
+            <DefaultButton icon={<PlayCircleIcon />} />
           </div>
         </form>
+      </Container>
+
+      <Container>
+        <Footer />
       </Container>
     </>
   );
