@@ -1,5 +1,6 @@
 import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import type { TaskModel } from "../../models/TaskModel";
 import { getNextCycle } from "../../utils/getNextCycle";
@@ -7,7 +8,6 @@ import { getNextCycleType } from "../../utils/getNextCycleType";
 import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
-import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -39,25 +39,11 @@ export function MainForm() {
       type: nextCycleType,
     };
 
-    dispatch({type: TaskActionTypes.START_TASK, payload: newTask})
-
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
   }
 
   function handleInterruptTask() {
-    // setState((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     activeTask: null,
-    //     secondsRemaining: 0,
-    //     formattedSecondsRemaining: '00:00',
-    //     tasks: prevState.tasks.map(task => {
-    //       if (prevState.activeTask && prevState.activeTask.id === task.id) {
-    //         return {...task, interruptDate: Date.now()} 
-    //       }
-    //       return task
-    //     })
-    //   };
-    // });
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   }
 
   return (
@@ -92,7 +78,7 @@ export function MainForm() {
             icon={<PlayCircleIcon />}
             key='botao_submit'
           />
-        )} 
+        )}
 
         {!!state.activeTask && (
           <DefaultButton
