@@ -19,7 +19,7 @@ export function AboutPomodoro() {
 
           <img src="https://placehold.co/1920x1080" alt="" />
 
-          <h2>Como funciona o Pomodoro tradicional?</h2>
+          <h2>Como funciona o Pomodoro tradicional ?</h2>
           <ul>
             <li>
               <strong>1. Defina uma tarefa</strong> que você deseja realizar.
