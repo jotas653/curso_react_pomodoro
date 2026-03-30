@@ -8,6 +8,7 @@ import { getNextCycleType } from "../../utils/getNextCycleType";
 import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
+import { Tips } from "../Tips";
 
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
@@ -40,6 +41,16 @@ export function MainForm() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+
+    const worker = new Worker(
+      new URL('../../workers/timeWorker.js', import.meta.url),
+    );
+
+    worker.postMessage('Olá mundo!')
+
+    worker.onmessage = function(event) {
+      console.log('PRINCIPAL RECEBEU:', event.data)
+    }
   }
 
   function handleInterruptTask() {
@@ -60,7 +71,7 @@ export function MainForm() {
       </div>
 
       <div className='formRow'>
-        <p>Próximo intervalo é de 25min</p>
+        <Tips />
       </div>
 
       {state.currentCycle > 0 && (
