@@ -10,8 +10,8 @@ self.onmessage = function (event) {
         self.postMessage('Ok: OI')
         break;
     }
-    case 'DAR TCHAU': {
-        self.postMessage('Ok: Tchau para você')
+    case 'FECHAR': {
+        self.postMessage('Tá bom, vou fechar para você')
         self.close()
         break;
     }
